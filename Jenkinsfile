@@ -75,7 +75,7 @@ pipeline{
         stage('Publish to Artifactory') {
             steps {
                 script {
-                    def server = Artifactory.server 'http://52.3.247.113:8082/artifactory'
+                    def server = Artifactory.server 'http://52.3.247.113:8082'
 
                     def buildInfo = Artifactory.newBuildInfo()
                     buildInfo.env.capture = true
@@ -89,7 +89,7 @@ pipeline{
         stage('Deploy to Artifactory') {
             steps {
                 script {
-                    def server = Artifactory.server 'http://52.3.247.113:8082/artifactory'
+                    def server = Artifactory.server 'http://52.3.247.113:8082'
 
                     def uploadSpec = """{
                         "files": [
