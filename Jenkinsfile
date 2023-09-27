@@ -72,6 +72,39 @@ pipeline{
                }
             }
         }
+        stage('Publish to Artifactory') {
+            steps {
+                script {
+                    def server = Artifactory.server 'http://52.3.247.113:8082/artifactory'
+
+                    def buildInfo = Artifactory.newBuildInfo()
+                    buildInfo.env.capture = true
+                    buildInfo.env.filter.add('JAVA_HOME')
+                    
+                    server.publishBuildInfo buildInfo
+                }
+            }
+        }
+
+        stage('Deploy to Artifactory') {
+            steps {
+                script {
+                    def server = Artifactory.server 'http://52.3.247.113:8082/artifactory'
+
+                    def uploadSpec = """{
+                        "files": [
+                            {
+                                "pattern": "target/*.jar",
+                                "target": "java-web-app/"
+                            }
+                        ]
+                    }"""
+                    
+                    server.upload spec: uploadSpec
+                }
+            }
+        }
+
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
