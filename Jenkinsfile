@@ -5,7 +5,7 @@ pipeline{
     agent any
 
     environment {
-        ARTIFACTORY_SERVER = 'http://52.3.247.113:8082/artifactory/'
+        ARTIFACTORY_SERVER = 'http://52.3.247.113:8082/'
         REPOSITORY_NAME = 'java-web-app/'
     }
 
