@@ -77,24 +77,13 @@ pipeline{
                }
             }
         }
-        stage('Publish to Artifactory') {
-            steps {
-                script {
-                    def server = Artifactory.server ARTIFACTORY_SERVER
-                    def buildInfo = Artifactory.newBuildInfo()
-                    
-                    server.upload spec: """{
-                        "files": [
-                            {
-                                "pattern": "target/*.jar",
-                                "target": "${REPOSITORY_NAME}/"
-                            }
-                        ]
-                    }"""
-                    
-                    server.publishBuildInfo buildInfo
-                }  
-        }
+        stage('Publish Artifract:jfrog'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   jfrog()
+               }
+            }
         }
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
