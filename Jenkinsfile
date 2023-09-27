@@ -4,6 +4,11 @@ pipeline{
 
     agent any
 
+    environment {
+        ARTIFACTORY_SERVER = 'http://52.3.247.113:8082/artifactory/'
+        REPOSITORY_NAME = 'java-web-app/'
+    }
+
     parameters{
 
         choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
@@ -75,36 +80,22 @@ pipeline{
         stage('Publish to Artifactory') {
             steps {
                 script {
-                    def server = Artifactory.server 'http://52.3.247.113:8082'
-
+                    def server = Artifactory.server ARTIFACTORY_SERVER
                     def buildInfo = Artifactory.newBuildInfo()
-                    buildInfo.env.capture = true
-                    buildInfo.env.filter.add('JAVA_HOME')
                     
-                    server.publishBuildInfo buildInfo
-                }
-            }
-        }
-
-        stage('Deploy to Artifactory') {
-            steps {
-                script {
-                    def server = Artifactory.server 'http://52.3.247.113:8082'
-
-                    def uploadSpec = """{
+                    server.upload spec: """{
                         "files": [
                             {
                                 "pattern": "target/*.jar",
-                                "target": "java-web-app/"
+                                "target": "${REPOSITORY_NAME}/"
                             }
                         ]
                     }"""
                     
-                    server.upload spec: uploadSpec
-                }
-            }
+                    server.publishBuildInfo buildInfo
+                }  
         }
-
+        }
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
