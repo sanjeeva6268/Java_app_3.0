@@ -29,7 +29,6 @@ pipeline{
             }
         }
          stage('Unit Test maven'){
-         
          when { expression {  params.action == 'create' } }
 
             steps{
@@ -81,6 +80,7 @@ pipeline{
          when { expression {  params.action == 'create' } }
             steps{
                script{
+                   sh "chmod +x -R ${env.WORKSPACE}"
                    jfrog()
                }
             }
