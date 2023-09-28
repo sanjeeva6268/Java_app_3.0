@@ -2,7 +2,7 @@ import requests
 import os
 
 # JFrog Artifactory details
-artifactory_url = 'http://54.237.65.84:8081/artifactory'
+artifactory_url = 'http://54.196.37.149:8082//artifactory'
 repository_name = 'example-repo-local'
 username = 'admin'
 password = 'Sanjeeva@123'
