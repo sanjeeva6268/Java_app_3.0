@@ -11,7 +11,7 @@ password = 'Sanjeeva@123'
 jar_file_path = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
 
 # Construct the URL for uploading
-upload_url = f'{artifactory_url}/{repository_name}/path/in/repository/{os.path.basename(jar_file_path)}'
+upload_url = f'{artifactory_url}/{repository_name}/example-repo-local/repository/{os.path.basename(jar_file_path)}'
 
 # Set up basic authentication
 auth = (username, password)
