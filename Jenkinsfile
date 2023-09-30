@@ -80,6 +80,7 @@ pipeline{
          when { expression {  params.action == 'create' } }
             steps{
                script{
+                   sh 'chmod +x jfrog.py'
                    jfrog()
                }
             }
