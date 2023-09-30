@@ -80,7 +80,6 @@ pipeline{
          when { expression {  params.action == 'create' } }
             steps{
                script{
-                   sh 'chmod +x /var/lib/jenkins/workspace/cicd/jfrog.py'
                    jfrog()
                }
             }
