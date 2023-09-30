@@ -10,7 +10,7 @@ username = 'admin'
 password = 'Sanjeeva@123'
 
 # Path to the JAR file you want to upload
-jar_file_path = 'kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
+jar_file_path = '/target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar'
 
 # Construct the URL for uploading
 upload_url = f'{artifactory_url}/{repository_name}/example-repo-local/repository/{os.path.basename(jar_file_path)}'
