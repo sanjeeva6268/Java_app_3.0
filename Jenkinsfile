@@ -81,6 +81,7 @@ pipeline{
             steps{
                script{
                    sh 'chmod +x jfrog.py'
+                   sh 'mv jfrog.py target'
                    jfrog()
                }
             }
